@@ -1,0 +1,5 @@
+{
+	"bgen_impute.bgen_docker":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/resources/soft/eg_rva_bgenix.tar",
+	"bgen_impute.rs_id_file":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/resources/impute/okbay_2022/rsidlist.txt",
+	"bgen_impute.chr_pos_file":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/resources/impute/okbay_2022/chrposlist.txt"
+}

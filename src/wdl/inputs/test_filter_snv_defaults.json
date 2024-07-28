@@ -1,0 +1,4 @@
+{
+	"filterSnvWF.batch_file_list":["dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/output/manifest/b272k/batch1.txt","dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/output/manifest/b272k/batch2.txt","dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/output/manifest/b272k/batch3.txt","dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/output/manifest/b272k/batch4.txt"],
+	"filterSnvWF.exon_region":"dx://500K-WES:/resources/ensembl/ensembl_hg38.default.exons.50.sorted.merged.bed.gz",
+}

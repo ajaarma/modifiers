@@ -1,0 +1,15 @@
+{
+	"annot_vep_snv.ref_fasta":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:file-GYPj208JkqkQy6Vyv1kqBq8Y",
+	"annot_vep_snv.ref_dict": "dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:file-GYPj3YQJkqkj7Q7zq95PfYfg",
+	"annot_vep_snv.ref_fasta_index":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:file-GYPj3k8Jkqkxf3Z9372vFyzJ",
+	"annot_vep_snv.cadd_wgs_snv":"dx://file-GZFjJJ8JkqkfZFqVq69b408F",
+	"annot_vep_snv.cadd_wgs_indel":"dx://file-GZFjJ70JkqkpBKpzyB8QPjG0",
+	"annot_vep_snv.exac_pli":"dx://file-GZG4vPjJkqkzx950xX3Gz820",
+	"annot_vep_snv.exac":"dx:///resources/exac/ExAC.0.3.hg38.vcf.gz",
+	"annot_vep_snv.revel_file":"dx://file-GZFjQPjJkqkyG614g32KvVzz",
+	"annot_vep_snv.spliceai_snv":"dx://file-GZFkBBjJkqkzkk3xBxY63Vpy",
+	"annot_vep_snv.spliceai_indel":"dx://file-GZFk42jJkqkf5VXbkZ7fzyGx",
+	"annot_vep_snv.ens_ref_merged":"dx:///resources/vep/homo_sapiens_merged_vep_104_GRCh38.tar.gz",
+	"annot_vep_snv.ref_fasta":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:file-GYPj208JkqkQy6Vyv1kqBq8Y",
+	"annot_vep_snv.vep_docker":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/resources/soft/dnx-vep-annot_v1.tar"
+}

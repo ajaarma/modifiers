@@ -1,0 +1,11 @@
+{
+	"ref_dict": "project-Fx2x0fQJ06KfqV7Y3fFZq1jp:file-Fx2x270J77QY6V4p3jjy94Q2",
+	"ref_fasta":"project-Fx2x0fQJ06KfqV7Y3fFZq1jp:file-Fx2x2JjJjbjfG5p83j8y7Pfg",
+	"ref_fasta_index":"project-Fx2x0fQJ06KfqV7Y3fFZq1jp:GRCh38.no_alt_analysis_set.fa.fai",
+	"known_indels_sites_vcfs":["project-Fx2q740Jkgpk5VK43fk77YZY:file-Fx2q8p0J4346z1gy3kqpjGBQ", "project-Fx2q740Jkgpk5VK43fk77YZY:file-Fx2q8jjJJqZ74Q9v3jFQqpfp"],
+	"known_indels_sites_index":["project-Fx2q740Jkgpk5VK43fk77YZY:file-Fx2q8kjJPXZ9qp5B3kggQQkx","project-Fx2q740Jkgpk5VK43fk77YZY:file-Fx2q8p0JGp582GPB3kGjFGFP"],
+	"dbsnp_vcf":"project-Fx2q740Jkgpk5VK43fk77YZY:file-Fx2q91QJ7JjxKYz73jXQPBp9",
+	"dbsnp_vcf_index":"project-Fx2q740Jkgpk5VK43fk77YZY:file-Fx2q8p0J2V2fZJ903kyGy2b6",
+	"target_intervals":"project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/resources/region/hg38_v0_exome_calling_regions.v1.bed"
+
+}

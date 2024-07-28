@@ -1,0 +1,15 @@
+{
+	"bqsr_hc_ms.input_cram_list":["dx://file-G564bJ0JykJXPx534x4v0X7Y",
+		"dx://file-G561zGjJykJyZ8y24j5Pp43F",
+		"dx://file-G560pvQJykJp0y0K4yqqbfYQ"
+	],
+	"bqsr_hc_ms.ref_dict": "dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:file-GYPj3YQJkqkj7Q7zq95PfYfg",
+	"bqsr_hc_ms.ref_fasta":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:file-GYPj208JkqkQy6Vyv1kqBq8Y",
+	"bqsr_hc_ms.ref_fasta_index":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:file-GYPj3k8Jkqkxf3Z9372vFyzJ",
+	"bqsr_hc_ms.known_indels_sites_vcfs":["dx://project-Fx2q740Jkgpk5VK43fk77YZY:file-Fx2q8p0J4346z1gy3kqpjGBQ", "dx://project-Fx2q740Jkgpk5VK43fk77YZY:file-Fx2q8jjJJqZ74Q9v3jFQqpfp"],
+	"bqsr_hc_ms.known_indels_sites_index":["dx://project-Fx2q740Jkgpk5VK43fk77YZY:file-Fx2q8kjJPXZ9qp5B3kggQQkx","dx://project-Fx2q740Jkgpk5VK43fk77YZY:file-Fx2q8p0JGp582GPB3kGjFGFP"],
+	"bqsr_hc_ms.dbsnp_vcf":"dx://project-Fx2q740Jkgpk5VK43fk77YZY:file-Fx2q91QJ7JjxKYz73jXQPBp9",
+	"bqsr_hc_ms.dbsnp_vcf_index":"dx://project-Fx2q740Jkgpk5VK43fk77YZY:file-Fx2q8p0J2V2fZJ903kyGy2b6",
+	"bqsr_hc_ms.target_intervals":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/resources/regions/hg38_v0_exome_calling_regions.v1.bed",
+	"bqsr_hc_ms.gatk_docker":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/resources/soft/gatk_4.1.9.0.tar"
+}

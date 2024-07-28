@@ -1,0 +1,7 @@
+{
+	"collect_rc.gatk_docker":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/resources/soft/gatk_4.1.9.0.tar",
+	"collect_rc.interval_file":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/resources/cnv/gdd.pp.interval_list",
+	"collect_rc.ref_file":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/resources/ref/Homo_sapiens_assembly38.fasta",
+	"collect_rc.ref_file_index":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/resources/ref/Homo_sapiens_assembly38.fasta.fai",
+	"collect_rc.ref_dict":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/resources/ref/Homo_sapiens_assembly38.dict"
+}

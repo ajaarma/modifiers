@@ -1,0 +1,6 @@
+{
+	"batch_vep_snv.ref_dict": "dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:file-GYPj3YQJkqkj7Q7zq95PfYfg",
+	"batch_vep_snv.ref_fasta":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:file-GYPj208JkqkQy6Vyv1kqBq8Y",
+	"batch_vep_snv.ref_fasta_index":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:file-GYPj3k8Jkqkxf3Z9372vFyzJ",
+	"batch_vep_snv.vep_docker":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/resources/soft/bcftools-1.19.tar"
+}

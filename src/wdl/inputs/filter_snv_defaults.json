@@ -1,0 +1,4 @@
+{
+	"mafImpTab.batch_file_list":["dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/output/manifest/b272k/batch1.txt","dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/output/manifest/b272k/batch2.txt","dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/output/manifest/b272k/batch3.txt","dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/output/manifest/b272k/batch4.txt"],
+	"mafImpTab.vep_docker":"dx://project-GV63Xq0Jkqky3PqPj7Jp1VPZ:/resources/soft/dnx-vep-annot-v3-2b5b.tar"
+}
