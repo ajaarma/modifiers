@@ -1,0 +1,671 @@
+<?xml version="6.0" ?>
+<config>
+	<general>
+		<version>1.0</version>
+		<genomeBuild>grch38</genomeBuild>
+		<resourceDir>/nfs/research/dunham/resources</resourceDir>
+		<refFasta></refFasta>
+		<picardLib> /hps/software/users/dunham/aak/anaconda3/envs/snv/share/picard-2.25.4-0/picard.jar</picardLib>
+		<!-- <email>aak@ebi.ac.uk</email> -->
+		<email>rahuldeovatsa@gmail.com</email>
+		<gatk_docker>/nfs/research/dunham/resources/softwares/gatk_sing/gatk_4.2.5.0.sif</gatk_docker>
+	</general>
+	<resources>
+		<reference>
+			<grch37>ref/grch37/hs37d5.fa</grch37>
+			<grch38>gatk_bundle/Homo_sapiens_assembly38.fasta</grch38>
+			<grch38_dict>gatk_bundle/Homo_sapiens_assembly38.dict</grch38_dict>
+			<ukb_grch38_fe>gatk_bundle/ukbb_fe/genome.fa</ukb_grch38_fe>
+			<ukb_grch38_spb>gatk_bundle/ukbb_spb/genome.fa</ukb_grch38_spb>
+		</reference>
+		<indels>
+			<grch37></grch37>
+			<grch38>gatk_bundle/Homo_sapiens_assembly38.known_indels.vcf.gz</grch38>
+		</indels>
+		<dbsnp>
+			<grch37></grch37>
+			<grch38>gatk_bundle/Homo_sapiens_assembly38.dbsnp138.vcf</grch38>
+		</dbsnp>
+		<hapmap>
+			<grch37></grch37>
+			<grch38>gatk_bundle/hapmap_3.3.hg38.sites.vcf.gz</grch38>
+		</hapmap>
+		<omni>
+			<grch37></grch37>
+			<grch38>gatk_bundle/1000G_omni2.5.hg38.sites.vcf.gz</grch38>
+		</omni>
+		<KG>
+			<grch37></grch37>
+			<grch38>gatk_bundle/1000G_phase1.snps.high_confidence.hg38.vcf.gz</grch38>
+		</KG>
+		<ensembl>
+			<grch37></grch37>
+			<grch38>ensembl/grch38/release-100/ensembl_grch38.default.exons.50.sorted.merged.bed.gz</grch38>
+			<hg19></hg19>
+			<hg38>ensembl/grch38/release-100/ensembl_hg38.default.exons.50.sorted.merged.bed.gz</hg38>
+			<transcriptLength>ensembl/grch38/release-100/ensBioMart_grch38_v100_ENST_lengths_200510.txt</transcriptLength>
+		</ensembl>
+		
+	</resources>
+	<slurm>
+		<dash>-</dash>
+		<params1>
+			<J>DLOAD</J>
+			<A>WGS10K-SL2-CPU</A>
+			<p>skylake-himem</p>
+		</params1>
+		<doubDash>--</doubDash>
+		<params2>
+			<nodes>=1</nodes>
+			<ntasks>=14</ntasks>
+			<time>=36:00:00</time>
+			<mail-type>=FAIL,END</mail-type>
+			<mail-user>%email%</mail-user>
+			<output>%outFile%</output>
+			<error>%errorFile%</error>
+			<exclusive></exclusive>
+		</params2>
+	</slurm>
+
+	<lsf>
+		<dash>-</dash>
+		<params1>
+			<J>.</J>
+			<!-- <m>hx-noah-33-03</m> -->
+			<!-- <m>hx-noah-31-01</m> -->
+			<N>.</N>
+			<n>2</n>
+			<M>15G</M>
+			<q>research</q>
+			<!-- <W>6</W> -->
+			<!-- <u>aak@ebi.ac.uk</u> -->
+			<!-- <u>rahuldeovatsa@gmail.com</u> -->
+			<u>infogistt@gmail.com</u>
+			<o>%outFile%</o>
+			<e>%errorFile%</e>
+		</params1>
+		
+	</lsf>
+
+	<ega>
+		<ddd2ega>EGAF00002251612/EGA_SUBMISSION_10k_dddp_to_ega.txt</ddd2ega>
+		<patPheno>EGAF00002191760/DDD10K_ega_patient_info_phenotypes.txt</patPheno>
+		<famRel>EGAF00002191759/DDD10K_family_relationships.txt</famRel>
+		<extId>EGAF00002191760/DDD10K_ega_patient_info_phenotypes.txt</extId>
+		<sampleMap>data/Sample_File.map</sampleMap>
+		<sampleDDDmap>data/map_all_sample_ddd.txt</sampleDDDmap>
+	</ega>
+
+	<gdd>
+		<cram>
+			<grch37></grch37>
+			<grch38></grch38>
+		</cram>
+		<vcf>
+			<grch37></grch37>
+			<grch38></grch38>
+		</vcf>
+	
+	</gdd>
+
+	<pyega>
+		<bin>pyega3</bin>
+		<cf>~/.config/ega_conf.json</cf>
+		<c>35</c>	
+	</pyega>
+
+	<picard>
+		
+		<RevertSam>
+			<I>%inpBamFile</I>
+			<O>%outDirectory</O>
+			<OUTPUT_BY_READGROUP>true</OUTPUT_BY_READGROUP>
+			<VALIDATION_STRINGENCY>LENIENT</VALIDATION_STRINGENCY>
+			<TMP_DIR>%tmpDirPath</TMP_DIR>
+
+		</RevertSam>
+		<MarkIlluminaAdapters>
+			<I>%inpBamFile</I>
+			<O>%outBamFile</O>
+			<M>%MetricsFile%</M>
+			<TMP_DIR>%tmpDirPath%</TMP_DIR>
+		</MarkIlluminaAdapters>
+		<SamToFastq>
+			<I>%inpBamFile%</I>
+			<F>%OutFastqFile</F>
+			<CLIP_ATTR>XT</CLIP_ATTR>
+			<CLIP_ACT>2</CLIP_ACT>
+			<INTER>true</INTER>
+			<NON_PF>true</NON_PF>
+			<VALIDATION_STRINGENCY>LENIENT</VALIDATION_STRINGENCY>
+			<TMP_DIR>%tmpDirPath%</TMP_DIR>
+		</SamToFastq>
+
+		<MergeBamAlignment>
+			<ALIGNED>%AlignedBamFile%</ALIGNED>	
+			<UNMAPPED>%UnmappedBamFile%</UNMAPPED>
+			<O>%outputFile%</O>
+			<R>%ReferenceFile</R>
+			<TMP_DIR>%tmpDirPath%</TMP_DIR>
+			<VALIDATION_STRINGENCY>LENIENT</VALIDATION_STRINGENCY>
+			<ADD_MATE_CIGAR>true</ADD_MATE_CIGAR>
+			<CLIP_ADAPTERS>false</CLIP_ADAPTERS>
+			<CLIP_OVERLAPPING_READS>true</CLIP_OVERLAPPING_READS>
+			<INCLUDE_SECONDARY_ALIGNMENTS>true</INCLUDE_SECONDARY_ALIGNMENTS>
+			<MAX_INSERTIONS_OR_DELETIONS>-1</MAX_INSERTIONS_OR_DELETIONS>
+			<PRIMARY_ALIGNMENT_STRATEGY>MostDistant</PRIMARY_ALIGNMENT_STRATEGY>
+			<ATTRIBUTES_TO_RETAIN>XS</ATTRIBUTES_TO_RETAIN>
+			<MAX_RECORDS_IN_RAM>100000</MAX_RECORDS_IN_RAM>
+		</MergeBamAlignment>
+		
+		<MergeSamFiles>
+			<I>%inputBamFile%</I>
+			<O>%outputBam%</O>
+			<TMP_DIR>%tmpDirPath%</TMP_DIR>
+			<R>%RefernceFile%</R>
+			<VALIDATION_STRINGENCY>LENIENT</VALIDATION_STRINGENCY>
+			<CREATE_INDEX>true</CREATE_INDEX>
+		</MergeSamFiles>
+		
+		<MarkDuplicates>
+			<I>%inputBamFile%</I>
+			<O>%outDedupFile%</O>
+			<M>/dev/null</M>
+			<ASO>coordinate</ASO>
+			<VALIDATION_STRINGENCY>SILENT</VALIDATION_STRINGENCY>
+			<PROGRAM_RECORD_ID>MarkDuplicates</PROGRAM_RECORD_ID>
+			<PROGRAM_GROUP_NAME>MarkDuplicates</PROGRAM_GROUP_NAME>
+			<REMOVE_DUPLICATES>false</REMOVE_DUPLICATES>
+			<READ_NAME_REGEX>[a-zA-Z0-9]+:[0-9]:[0-9]+:[0-9]+:[0-9]+.*</READ_NAME_REGEX>
+			<VERBOSITY>INFO</VERBOSITY>
+			<MAX_RECORDS_IN_RAM>100000</MAX_RECORDS_IN_RAM>
+			<TMP_DIR>%tmpDirPath%</TMP_DIR>
+			<CREATE_INDEX>true</CREATE_INDEX>
+		</MarkDuplicates>
+		<GatherVcfs>
+			<I>%inputVcfFile%</I>
+			<O>%outputVcfFile%</O>
+			<R>%referenceFile%</R>
+			<CREATE_INDEX>true</CREATE_INDEX>
+			<MAX_RECORDS_IN_RAM>50000</MAX_RECORDS_IN_RAM>
+			<TMP_DIR>%pathToTmpDir</TMP_DIR>
+		</GatherVcfs>
+		<SortVcf>
+			<INPUT>%inputVcf%</INPUT>
+			<OUTPUT>%OutSortedVcf%</OUTPUT>
+			<MAX_RECORDS_IN_RAM>5000</MAX_RECORDS_IN_RAM>
+			<TMP_DIR>%tmpDirPath%</TMP_DIR>
+		</SortVcf>
+	</picard>
+
+	<bwa>
+		<mem>
+			<t>14</t>
+			<K>1000000000</K>
+			<p></p>
+			<Y></Y>
+			<o>%outFile%</o>
+		</mem>
+	</bwa>
+	
+	<gatk>
+		<BaseRecalibrator>
+			<input>%inputFile%</input>
+			<output>%outputFile%</output>
+			<reference>%referenceFile%</reference>
+			<!-- <intervals>%interval</intervals> -->
+			<known-sites>gatk_bundle/Homo_sapiens_assembly38.known_indels.vcf.gz</known-sites>
+			<known-sites>gatk_bundle/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz</known-sites>
+			<known-sites>gatk_bundle/Homo_sapiens_assembly38.dbsnp138.vcf</known-sites>
+			<!-- <TMP_DIR>%tmpDirPath</TMP_DIR> -->
+		</BaseRecalibrator>
+		<ApplyBQSR>
+			<input>%inputDedupBam%</input>
+			<output>%outputBam%</output>
+			<reference>%referenceFile%</reference>
+			<bqsr-recal-file>%bqsrRecalFile%</bqsr-recal-file>
+			<!-- <intervals>%intervals%</intervals> -->
+			<tmp-dir>%tmpDirPath%</tmp-dir>
+		</ApplyBQSR>
+
+		<HaplotypeCaller>
+			<I>%inputBamFile%</I>
+			<O>%OutputGvcfFile%</O>
+			<R>%referenceFile</R>
+			<!-- <L>regions/grch38/df2017.lov.hg38.uniq.sorted.bed</L> -->
+			<!-- <L>regions/grch38/UKBB_xgen_plus_spikein.GRCh38.bed</L> -->
+			<L>regions/grch38/ukbb/hg38_v0_exome_calling_regions.v1.bed</L>
+			<!-- <ip>100</ip> -->
+			<!-- <G>AlleleSpecificAnnotation</G> -->
+			<G>AS_StandardAnnotation</G>
+			<G>StandardAnnotation</G>
+			<D>gatk_bundle/Homo_sapiens_assembly38.dbsnp138.vcf</D>
+			<LE>true</LE>
+			<ERC>GVCF</ERC>
+			<VS>LENIENT</VS>
+			<native-pair-hmm-threads>%NumThreads%</native-pair-hmm-threads>	
+			<tmp-dir>%tmpDirPath</tmp-dir>
+		</HaplotypeCaller>
+		<GenomicsDBImport>
+			<!-- <variant>%inputGvcfFile%</variant> -->
+			<genomicsdb-workspace-path>%workSpaceDirPath%</genomicsdb-workspace-path>
+			<tmp-dir>%tmpDirPath%</tmp-dir>
+			<!-- <intervals>%intervals%</intervals> -->
+			<!-- <intervals>regions/grch38/gt_dbi/df2017.lov.hg38.chr%.bed</intervals> -->
+			<intervals>regions/grch38/ukbb/gt_dbi/hg38_v0_exome_calling_regions.v1.chr%.bed</intervals>
+			<batch-size>30</batch-size>
+			<reader-threads>30</reader-threads>
+			<reference>%RefFile%</reference>
+			<consolidate>false</consolidate>
+			<!-- <interval-padding>100</interval-padding> -->
+			<merge-input-intervals>true</merge-input-intervals>
+			<sample-name-map>/nfs/research/dunham/samples/ddd/data/GDD/manifest/mms_gen_all_sample_map.txt</sample-name-map>
+		</GenomicsDBImport>
+		
+		<CombineGVCFs>
+			<reference>%RefFile%</reference>
+			<variant>%inputGvcfFile%</variant>
+			<output>%outGvcfFile%</output>
+			<!-- <dbsnp>%dbSNPFile%</dbsnp> -->
+			<intervals>%intervals%</intervals>
+		</CombineGVCFs>
+		<GenotypeGVCF>
+			<R>%refFile%</R>
+			<V>%genomicsDB%</V>
+			<O>%outputFile%</O>
+			<!-- <L>regions/grch38/gt_dbi/df2017.lov.hg38.chr%.bed</L> -->
+			<D>gatk_bundle/Homo_sapiens_assembly38.dbsnp138.vcf</D>
+			<!-- <interval-padding>100</interval-padding> -->
+		</GenotypeGVCF>
+		<VariantRecalibrator>
+			<reference>%referenceFile%</reference>
+			<variant>%inputVcf%</variant>
+			<output>%outputFile</output>
+			<resource>
+				<value>hapmap,known=false,training=true,truth=true,prior=15.0:hapmap_3.3.hg38.vcf.gz</value>
+				<value>omni,known=false,training=true,truth=false,prior=12.0:1000G_omni2.5.hg38.vcf.gz</value>
+				<value>1000G,known=false,training=true,truth=false,prior=10.0:1000G_phase1.snps.high_confidence.hg38.vcf.gz</value>
+				<value>dbsnp,known=true,training=false,truth=false,prior=2.0:Homo_sapiens_assembly38.dbsnp138.vcf</value>
+
+			</resource>
+			
+			<an>
+				<value>QD</value>
+				<value>MQ</value>
+				<value>MQRankSum</value>
+				<value>ReadPosRankSum</value>
+				<value>FS</value>
+				<value>SOR</value>
+			</an>
+			<mode>SNP</mode>
+			<tranches-file>%tranchesFile%</tranches-file>
+			<AS>true</AS>
+			<!-- <rscript-file>%plots.AS.R%</rscript-file> -->
+
+		</VariantRecalibrator>
+		
+		<ApplyVQSR>
+			<reference>%RefFile%</reference>
+			<variant>%VariantFile</variant>
+			<output>%OutputVcf%</output>
+			<use-allele-specific-annotations>true</use-allele-specific-annotations>
+			<truth-sensitivity-filter-level>99.0</truth-sensitivity-filter-level>
+			<tranches-file>%AS.tranches%</tranches-file>
+			<recal-file>%AS.RecalFile%</recal-file>
+			<mode>SNP</mode>
+		</ApplyVQSR>
+
+		<PreprocessIntervals>
+			<reference>%refFile%</reference>
+			<intervals>%intervals%</intervals>
+			<interval-merging-rule>OVERLAPPING_ONLY</interval-merging-rule>
+			<padding>250</padding>
+			<output>%processedIntervalList%</output>
+		</PreprocessIntervals>
+		
+		<CollectReadCounts>
+			<intervals>%intervalsOutList%</intervals>
+			<reference>%refFile%</reference>
+			<interval-merging-rule>OVERLAPPING_ONLY</interval-merging-rule>
+			<input>%inputBam%</input>
+			<output>%ReadCountOutTSV%</output>
+			<format>TSV</format>
+		</CollectReadCounts>
+
+		<AnnotateIntervals>
+			<intervals>%intervals%</intervals>
+			<reference>%refFile%</reference>
+			<interval-merging-rule>OVERLAPPING_ONLY</interval-merging-rule>
+			<output>%annotOutIntervals%</output>
+		</AnnotateIntervals>
+
+		<FilterIntervals>
+			<intervals>%processedIntervalList%</intervals>
+			<input>%InputReadCountTSV%</input>
+			<annotated-intervals>%annotOutIntervals%</annotated-intervals>
+			<interval-merging-rule>OVERLAPPING_TRUE</interval-merging-rule>
+			<low-count-filter-count-threshold>5</low-count-filter-count-threshold>
+			<low-count-filter-percentage-of-samples>90.0</low-count-filter-percentage-of-samples>
+			<extreme-count-filter-minimum-percentile>1.0</extreme-count-filter-minimum-percentile>
+			<extreme-count-filter-maximum-percentile>99.0</extreme-count-filter-maximum-percentile>
+			<extreme-count-filter-percentage-of-samples>90.0</extreme-count-filter-percentage-of-samples>
+			<output>%GCfilteredInterval%</output>
+		</FilterIntervals>
+
+		<DetermineGermlineContigPloidy>
+			<intervals>%GCfilteredIntervals%</intervals>
+			<interval-merging-rule>OVERLAPPING_TRUE</interval-merging-rule>
+			<input>%%InputReadCountTSV%</input>
+			<contig-ploidy-priors>resources/gatk_cnv/ploidy-model/contig_ploidy_prior.tsv</contig-ploidy-priors>
+			<output>%outDir%</output>
+			<output-prefix>ploidy</output-prefix>
+			<verbosity>DEBUG</verbosity>
+		</DetermineGermlineContigPloidy>
+	
+	</gatk>
+	<openssl>
+		<d>-aes-256-cbc</d>
+		<in>%inpFile%</in>
+		<out>%outFile%</out>
+		<k>nlNfN1scnTWBzfa94AAia7ReqSRMr5zI</k>
+		<md>sha256</md>
+	</openssl>
+
+ 	<annotation> 
+		<vep-bin>/nfs/research/dunham/resources/softwares/ensembl-vep/vep</vep-bin>
+	  	<outFormat>vcf</outFormat>
+	  	<doubDash>--</doubDash>
+	  	<defPar> 
+		  	<format>vcf</format>
+	  	  	<offline></offline>
+			<cache></cache>
+			<merged></merged>
+		  	<dir_cache>softwares/vep</dir_cache>
+		  	<force_overwrite></force_overwrite>
+		  	<species>homo_sapiens</species>
+		  	<assembly>GRCh38</assembly>
+			  <!-- <port>3337</port> -->
+		        <fasta>%ref_seq%</fasta>
+		  	<vcf_info_field>ANN</vcf_info_field>
+	  	</defPar>
+	  	<all>
+			  <sift>b</sift>
+			  <polyphen>b</polyphen>
+			  <humdiv></humdiv>
+			  <regulatory></regulatory>
+			  <allele_number></allele_number>
+			  <total_length></total_length>
+			  <numbers></numbers>
+			  <domains></domains>
+			  <hgvs></hgvs>
+			  <protein></protein>
+			  <symbol></symbol>
+			  <ccds></ccds>
+			  <uniprot></uniprot>
+			  <canonical></canonical>
+			  <mane></mane>
+			  <biotype></biotype>
+			  <check_existing></check_existing>
+			  <af></af>
+			  <af_1kg></af_1kg>
+			  <pubmed></pubmed>
+			  <gene_phenotype></gene_phenotype>
+			  <variant_class></variant_class>
+	  	</all>
+	  	<plugIn>
+	          	<CADD>
+				<cadd_snv>cadd/grch38/v1.6/whole_genome_SNVs.tsv.gz</cadd_snv>
+				<cadd_indel>cadd/grch38/v1.6/gnomad.genomes.r3.0.indel.tsv.gz</cadd_indel>
+		  	</CADD>
+			<!-- <ExACpLI>softwares/vep/VEP_plugins/ExACpLI_values.txt</ExACpLI> -->
+			<pLI>softwares/vep/VEP_plugins/pLI_values.txt</pLI> <!-- Ensembl VEP - 110 -->
+			<REVEL>revel/grch38/new_tabbed_revel_grch38.tsv.gz</REVEL>
+
+			<SpliceAI>
+				<snv>spliceai/grch38/spliceai_scores.raw.snv.hg38.vcf.gz</snv>
+				<indel>spliceai/grch38/spliceai_scores.raw.indel.hg38.vcf.gz</indel>
+			</SpliceAI>
+			<dbNSFP>
+				<txt>dbnsfp/grch38/dbNSFP4.2a.txt.gz</txt>
+				<fields>LRT_score,FATHMM_score,PROVEAN_score,MutationTaster_score</fields>
+			</dbNSFP>
+			<LoFtool>
+				<txt>softwares/vep/VEP_plugins/LoFtool_scores.txt</txt> 
+			</LoFtool>
+			<AlphaMissense> 
+				<txt>alpham/grch38/AlphaMissense_hg38.tsv.gz </txt>
+			</AlphaMissense>
+
+			<!--
+			<G2P>
+				<csv>ddg2p/DDG2P_17_11_2021.csv</csv>
+			</G2P>
+			-->
+	  	</plugIn>
+		
+		<cust-annot> 
+		          <!-- 
+			  <WGS10K>
+				<chr></chr>
+				<vcfDir>/rds/project/who1000/rds-who1000-wgs10k/WGS10K/</vcfDir>
+				<vcf>data/release/20170614-A/merged-vcf/no_hgmd/chr%s_agg3_dedup_vep.vcf.gz</vcf>
+				<fields>WGS10K_AC,WGS10K_AN,WGS10K_AF</fields>
+				  </WGS10K>
+			  -->
+			<!-- 
+			  <GNOMADV3>
+				<chr></chr>
+				<excl_chr>MT</excl_chr>
+				<repl_chr>21</repl_chr>
+				<vcf>
+					<grch38>gnomad/grch38/r3.0/byChr/gnomad.genomes.r3.0.sites.chr%s.vcf.bgz</grch38>
+					<hg38>gnomad/hg38/r3.0/gnomad.genomes.r3.0.sites.chr%s.vcf.bgz</hg38>
+				</vcf>
+				<fields>AC,AF,nhomalt,AC_male,AC_female,AF_male,AF_female,AF_afr,AF_amr,AF_asj,AF_eas,AF_fin,AF_nfe,AF_oth,AF_sas,AF_ami,AC_afr,AC_amr,AC_asj,AC_eas,AC_fin,AC_nfe,AC_oth,AC_sas,AC_ami,nhomalt_afr,nhomalt_amr,nhomalt_asj,nhomalt_eas,nhomalt_fin,nhomalt_nfe,nhomalt_oth,nhomalt_sas,nhomalt_ami</fields>			    
+				<tag>GNOMADgV3</tag>
+			  </GNOMADV3>
+			  <GNOMADg>
+				<chr></chr>
+				<vcf>
+					<grch38>gnomad/grch38/genomes/gnomad.genomes.r2.1.1.sites.%s.liftover_grch38.vcf.bgz</grch38>
+					<hg38>gnomad/hg38/genomes/gnomad.genomes.r2.1.1.sites.%s.liftover_grch38.vcf.bgz</hg38>
+				</vcf>
+				<fields>AC,AF,nhomalt,AC_male,AC_female,AF_male,AF_female,AF_afr,AF_amr,AF_asj,AF_eas,AF_fin,AF_nfe,AF_oth,AC_afr,AC_amr,AC_asj,AC_eas,AC_fin,AC_nfe,AC_oth,nhomalt_afr,nhomalt_amr,nhomalt_asj,nhomalt_eas,nhomalt_fin,nhomalt_nfe,nhomalt_oth,popmax,AC_popmax,AN_popmax,AF_popmax</fields>
+				<tag>GNOMADg</tag>
+			  </GNOMADg>
+			  <GNOMADe>
+				<chr></chr>
+				<vcf>
+					<grch38>gnomad/grch38/exomes/gnomad.exomes.r2.1.1.sites.%s.liftover_grch38.vcf.bgz</grch38>
+					<hg38>gnomad/hg38/exomes/gnomad.exomes.r2.1.1.sites.%s.liftover_grch38.vcf.bgz</hg38>
+				</vcf>
+				<fields>AC,AF,nhomalt,AC_male,AC_female,AF_male,AF_female,AF_afr,AF_amr,AF_asj,AF_eas,AF_fin,AF_nfe,AF_oth,AF_sas,AC_afr,AC_amr,AC_asj,AC_eas,AC_fin,AC_nfe,AC_oth,AC_sas,nhomalt_afr,nhomalt_amr,nhomalt_asj,nhomalt_eas,nhomalt_fin,nhomalt_nfe,nhomalt_oth,nhomalt_sas,popmax,AC_popmax,AN_popmax,AF_popmax</fields>
+				<tag>GNOMADe</tag>
+			  </GNOMADe>
+			  <EXAC>
+				  <vcf>
+					  <grch38>exac/grch38/ExAC.0.3.GRCh38.vcf.gz</grch38>
+					  <hg38>exac/hg38/ExAC.0.3.hg38.vcf.gz</hg38>
+				  </vcf>
+				<fields>AC,AF,AN,AC_Hemi,AC_Hom,AC_AFR,AC_AMR,AC_Adj,AC_EAS,AC_FIN,AC_NFE,AC_OTH,AC_SAS,AN_AFR,AN_AMR,AN_Adj,AN_EAS,AN_FIN,AN_NFE,AN_OTH,AN_SAS</fields>
+				<tag>EXAC</tag>
+			</EXAC> 
+			-->
+			<GNOMADe4>
+				<chr></chr>
+				<vcf>
+					<grch38>gnomad/grch38/v4.0_wes/gnomad.exomes.v4.0.sites.chr%s.vcf.bgz</grch38>
+					<hg38>gnomad/grch38/v4.0_wes/gnomad.exomes.v4.0.sites.chr%s.vcf.bgz</hg38>
+				</vcf>
+				<fields>AC,AF,AN,fafmax_faf95_max,AC_XX,AF_XX,AN_XX,AC_XY,AF_XY,AN_XY,AF_afr,AF_amr,AF_asj,AF_eas,AF_fin,AF_mid,AF_nfe,AC_raw,AN_raw,AF_raw,AF_remaining,AF_sas,AC_joint,AF_joint,AN_joint,faf95,faf99</fields>
+				<tag>GNOMADe4</tag>
+			</GNOMADe4>
+			<GNOMADg4>
+				<chr></chr>
+				<vcf>
+					<grch38>gnomad/grch38/v4.0_wgs/gnomad.genomes.v4.0.sites.chr%s.vcf.bgz</grch38>
+					<hg38>gnomad/grch38/v4.0_wgs/gnomad.genomes.v4.0.sites.chr%s.vcf.bgz</hg38>
+				</vcf>
+				<fields>AC,AF,AN,fafmax_faf95_max,AC_XX,AF_XX,AN_XX,AC_XY,AF_XY,AN_XY,AF_afr,AF_amr,AF_asj,AF_eas,AF_fin,AF_mid,AF_nfe,AC_raw,AN_raw,AF_raw,AF_remaining,AF_sas,AC_joint,AF_joint,AN_joint,faf95,faf99</fields>
+				<tag>GNOMADg4</tag>
+			</GNOMADg4>
+			<!--
+			  <EXACt>
+				<vcf>.</vcf>
+				<fields>Hom_AMR,Hom_EAS,Hom_FIN,Hom_NFE,Hom_OTH,Hom_SAS,POPMAX</fields>
+				<tag>EXAC</tag>
+			  </EXACt> 
+
+			  <TOPMED>
+				  <vcf>.</vcf>
+				  <fields>AC,AF,AN,Het,Hom</fields>
+				  <tag>TOPMED</tag>
+			  </TOPMED>
+			  <HGMD>
+				<vcf>.</vcf>
+				<fields>ID,CLASS,MUT,DB,DNA,GENE,PROT,PHEN</fields>
+				<tag>HGMD</tag>
+			  </HGMD>
+			  -->
+			<CLINVAR>
+				<vcf>
+					<!-- <grch38>clinvar/grch38/20211026/clinvar.vcf.gz</grch38> -->
+					<grch38>clinvar/grch38/20231007/clinvar.vcf.gz</grch38>
+					<!-- <hg38>clinvar/grch38/20211026/clinvar.chr.vcf.gz</hg38> -->
+					<hg38>clinvar/grch38/20231007/clinvar.chr.vcf.gz</hg38>
+				</vcf>
+				<fields>INFO</fields>
+			</CLINVAR>
+		</cust-annot>
+		<combChromTab>
+			<combBin>combinePriorTab.R</combBin>
+			<bcfSuffix>AC0.norm.vep.anno.sites.%db%.freq.exon.%cutOff%.%dbType%</bcfSuffix>
+			<tabSuffix>AC0.norm.vep.anno.sites.%db%.freq.exon.%cutOff%.%dbType%.imp.prior</tabSuffix>
+		</combChromTab>
+	</annotation>
+	<combChromTab>
+		<combBin>combinePriorTab.R</combBin>
+		<bcfSuffix>AC0.norm.vep.anno.sites.%db%.freq.exon.%cutOff%.%dbType%</bcfSuffix>
+		<tabSuffix>AC0.norm.vep.anno.sites.%db%.freq.exon.%cutOff%.%dbType%.imp.prior</tabSuffix>
+	</combChromTab>
+	<sv>
+		<PreprocessIntervals>
+			<reference>%refFile%</reference>
+			<!-- <intervals>regions/grch38/df2017.4SV.lov.hg38.uniq.sorted.bed</intervals> -->
+			<intervals>regions/grch38/ukbb/hg38_v0_exome_calling_regions.v1.bed</intervals>
+			<bin-length>0</bin-length>
+			<padding>250</padding>
+			<interval-merging-rule>OVERLAPPING_ONLY</interval-merging-rule>
+			<output>%outPicardIntervalList%</output>
+		</PreprocessIntervals>
+		<CollectReadCounts>
+			<intervals>%outPicardIntervalList%</intervals>
+			<reference>%refFile%</reference>
+			<interval-merging-rule>OVERLAPPING_ONLY</interval-merging-rule>
+			<input>%BAMFile%</input>
+			<format>TSV</format>
+			<output>%InputRC.tsv%</output>
+		</CollectReadCounts>
+		<AnnotateIntervals>
+			<intervals>%outPicardIntervalList</intervals>
+			<reference>%refFile%</reference>
+			<interval-merging-rule>OVERLAPPING_ONLY</interval-merging-rule>
+			<output>%outAnnotated.tsv</output>			
+		</AnnotateIntervals>
+		<FilterIntervals>
+			<intervals>%outPicardIntervalList%</intervals>
+			<annotated-intervals>%outAnnotated.tsv%</annotated-intervals>
+			<input>%inputRC.tsv%</input>
+			<interval-merging-rule>OVERLAPPING_ONLY</interval-merging-rule>
+			<output>%cohort.gc.filtered.intervalList%</output>
+		</FilterIntervals>
+		<DetermineGermlineContigPloidy>
+			<intervals>%cohort.gc.filtered.intervalList%</intervals>
+			<!-- <exclude-intervals>%ExcludeIntervalList%</exclude-intervals> -->
+			<interval-merging-rule>OVERLAPPING_ONLY</interval-merging-rule>
+			<input>%inputRC.tsv%</input>
+			<contig-ploidy-priors>gatk_cnv/ploidy-model/contig_ploidy_prior.tsv</contig-ploidy-priors>
+			<output>%outDir%</output>
+			<output-prefix>%cohortName%</output-prefix>
+		</DetermineGermlineContigPloidy>
+		<GermlineCNVCaller>
+			<run-mode>COHORT</run-mode>
+			<intervals>%intervals.interval_list%</intervals>
+			<contig-ploidy-calls>ploidy-calls</contig-ploidy-calls>
+			<annotated-intervals>%outAnnotatedInterval.tsv%</annotated-intervals>
+			<input>%Read_count_genomic_interval_per_sample%</input>
+			<output>%output_directory%</output>
+			<output-prefix>%outPrefix%</output-prefix>
+			<tmp-dir>%tmp_dir%</tmp-dir>
+			<interval-merging-rule>OVERLAPPING_ONLY</interval-merging-rule>
+			<verbosity>DEBUG</verbosity>
+		</GermlineCNVCaller>
+
+		<IntervalListTools>
+			<INPUT>%cohort.gc.filtered.intervalList%</INPUT>
+			<SUBDIVISION_MODE>INTERVAL_COUNT</SUBDIVISION_MODE>
+			<SCATTER_CONTENT>10000</SCATTER_CONTENT>
+			<OUTPUT>%scatterDirectory%</OUTPUT>
+		</IntervalListTools>
+
+		<PostprocessGermlineCNVCalls>
+			<calls-shard-path>%GermlineCNVCallerDirectory%</calls-shard-path>
+			<contig-ploidy-calls>%DetermineGermlineContigPloidyDirectory%</contig-ploidy-calls>
+			<model-shard-path>%GermlineCNVCallerModelDirectory%</model-shard-path>
+			<sample-index>%sampleIndexInCallSet%</sample-index>
+			<autosomal-ref-copy-number>2</autosomal-ref-copy-number>
+			<allosomal-contig>
+				<value>chrX</value>
+				<value>chrY</value>
+			</allosomal-contig>
+			<output-genotyped-intervals>%SampleGenotypedIntervals%</output-genotyped-intervals>
+			<output-genotyped-segments>%SampleGenotypedSegments%</output-genotyped-segments>
+			<output-denoised-copy-ratios>%SampleDenosiedCopyRatio%</output-denoised-copy-ratios>
+		</PostprocessGermlineCNVCalls>
+		<mantaSV>
+			<bam>%InputBam%</bam>
+			<referenceFasta>%refFile%</referenceFasta>
+			<runDir>%outputDir%</runDir>	
+		</mantaSV>
+		<cnest>
+			<!-- <docker>docker://tomas81/cnest:dev</docker> -->
+			<docker>/nfs/research/dunham/resources/softwares/CNest/cnest_dev.sif</docker>
+			<step1>
+				<project>ms_pb_par</project>
+				<bed>regions/grch38/df2017.lov.250.hg38.uniq.sorted.bed </bed>
+			</step1>
+			<step2>
+				<project>%proejctName</project>
+				<sample>%inputBamFileName</sample>
+				<input>%InputBamFile</input>
+			</step2>
+			<step3>
+				<indextab>index_tab.txt</indextab>
+				<bindir>bin</bindir>
+				<qc>qc_file.txt</qc>
+				<gender>gender_file.txt</gender>
+				<cov>coverage_file.txt</cov>
+			</step3>
+			<step4>
+				<indextab>index_tab.txt</indextab>
+				<bindir>bin</bindir>
+				<cordir>cor</cordir>
+				<rbindir>rbin</rbindir>
+				<logrdir>logr</logrdir>
+				<gender>gender_file.txt</gender>
+				<sample>%sampleDir%</sample>
+				<batch>%batchNum%</batch>
+			</step4>
+			<step5>
+				<indextab>index_tab.txt</indextab>
+				<cordir>cor</cordir>
+				<rbindir>rbin</rbindir>
+				<cnvdir>cnv</cnvdir>
+				<cov>coverage_file.txt</cov>
+				<gender>gender_file.txt</gender>
+				<sample>%sampleName%</sample>
+				<batch>%batchNum%</batch>
+			</step5>
+		</cnest>
+	</sv>
+</config>
